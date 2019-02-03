@@ -25,6 +25,7 @@ def checkout(request):
             order.save()
             
             cart = request.session.get('cart', {})
+            print('CART',cart)
             total = 0
             for id, quantity in cart.items():
                 product = get_object_or_404(Product, pk=id)
@@ -37,6 +38,7 @@ def checkout(request):
                 order_line_item.save()
                 
             try:
+                print('EMAIL',request.user.email)
                 customer = stripe.Charge.create(
                     amount = int(total * 100),
                     currency = "EUR",

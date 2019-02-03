@@ -26,9 +26,12 @@ def adjust_cart(request, id):
     """Adjust the quantity of the specified product to the specified amount"""
     quantity = int(request.POST.get('quantity'))
     cart = request.session.get('cart', {})
-    
+    print('quantity',quantity)
     if quantity > 0:
         cart[id] = quantity
+        print('id',id)
+        print('cart[id]',cart[id])
+        print('cart',cart)
     else:
         cart.pop(id)
         

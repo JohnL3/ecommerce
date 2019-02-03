@@ -1,11 +1,33 @@
 {% extends 'base.html' %}
+{% load static from staticfiles %}
 
-{% block page_title %}{{ user }}'s profile{% endblock %}
+{% block page_title %}
+   <title>{{user}}'s Profile</title>
+{% endblock page_title %}
 
-{% block page_heading %}{{ user }}'s profile{% endblock %}
+{% block page_heading %}
+{{ user }}'s profile
+{% endblock page_heading %}
 
 {% block content %}
-<p>{{ user.email }}</p>
+<p>{{ user.email }}</p><spang>Wow</spang>
 <p>{{ profile}}</p>
 <p>{{ profile.email }}</p>
-{% endblock %}
+
+<div class='add-avatar'>
+    <form method='POST' enctype='multipart/form-data'>
+        {% csrf_token %}
+        {{ form }}
+        <!-- <button class='sub-btn'>Submit</button> -->
+        <button>Submit</button>
+    </form>
+</div>
+
+<div class="profile-img">
+    <img src="{{ user.profile.avatar_url}}">
+</div>
+{% endblock content %}
+
+{% block body_js %}
+<script src="{% static 'js/profile.js' %}"></script> 
+{% endblock body_js %}

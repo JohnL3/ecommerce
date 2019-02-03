@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
+from .models import Profile
 from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import ValidationError
 
@@ -37,4 +38,10 @@ class UserRegistrationForm(UserCreationForm):
             raise forms.ValidationError('Passwords must match')
            
         return password2
+        
+        
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['avatar_url', 'image']
     
